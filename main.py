@@ -58,5 +58,4 @@ while day <= int(current_day):
         print(name)
         print(value)
 
-    var_url = urlclose(str)  # Close url created earlier
     day = day + 1
