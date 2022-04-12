@@ -1,3 +1,11 @@
+#!/usr/bin/env python3
+# by Dmitry Dolgov
+# EPAM Diploma Project
+# v.0.1 - 2022-04-12
+# Data from the cbr.ru about valutes.
+# Back-end of application
+# Getting data
+
 from urllib.request import urlopen
 from xml.etree.ElementTree import parse
 from datetime import date
@@ -50,4 +58,5 @@ while day <= int(current_day):
         print(name)
         print(value)
 
+    var_url = urlclose(str)  # Close url created earlier
     day = day + 1
