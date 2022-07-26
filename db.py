@@ -1,5 +1,7 @@
 import psycopg2
 
+
+# Function connection to database
 def create_connection(db_name, db_user, db_password, db_host, db_port):
     connection = None
     try:
@@ -17,11 +19,15 @@ def create_connection(db_name, db_user, db_password, db_host, db_port):
 
 connection = create_connection("postgres", "postgres", "111111", "127.0.0.1", "5432")
 
+# Function creation of database "cbr"
 def create_database(connection, query):
     connection.autocommit = True
     cursor = connection.cursor()
     try:
-        cursor.execute(query)
+        cursor.execute("SELECT COUNT(*) = 0 FROM pg_catalog.pg_database WHERE datname = 'cbr'")
+        not_exists, = cursor.fetchone()
+        if not_exists:
+            cursor.execute(query)
         print("Query executed successfully")
     except OperationalError as e:
         print(f"The error '{e}' occurred")
@@ -31,6 +37,7 @@ create_database(connection, create_database_query)
 
 connection = create_connection("cbr", "postgres", "111111", "127.0.0.1", "5432")
 
+# Function creation of table "valutes"
 def execute_query(connection, query):
     connection.autocommit = True
     cursor = connection.cursor()
