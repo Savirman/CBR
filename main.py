@@ -9,6 +9,7 @@
 from urllib.request import urlopen
 from xml.etree.ElementTree import parse
 from datetime import date
+import db
 
 # Getting current date
 current_date = date.today().strftime("%Y%m%d")       # Date type to string conversion (e.g. 2022-04-11 -> 20220411)
@@ -60,6 +61,9 @@ while day <= int(current_day):
         print(value)
         print(" ")
 
-        # Call function insert values into table
+        insert_values_into_valutes = f"INSERT INTO valutes (date, valuteid, numcode, charcode, nominal, name, value) VALUES ('{valkurs['Date']}', '{valuteid['ID']}', {numcode},'{charcode}', {nominal}, '{name}', '{value}')"
+        db.insertion(db.connection, insert_values_into_valutes)
 
     day = day + 1
+
+db.connection.close()

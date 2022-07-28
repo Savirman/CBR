@@ -6,7 +6,6 @@
 # Interraction with PostgreSQL Database
 
 import psycopg2
-#import main
 
 # Function connection to database
 def create_connection(db_name, db_user, db_password, db_host, db_port):
@@ -57,28 +56,25 @@ def execute_query(connection, query):
 # Query creation of table "valutes"
 create_valutes_table = """
 CREATE TABLE IF NOT EXISTS valutes (
-  valuteid VARCHAR(6) PRIMARY KEY NOT NULL,
+  date VARCHAR(10) NOT NULL, 
+  valuteid VARCHAR(10) NOT NULL,
   numcode INTEGER NOT NULL, 
   charcode VARCHAR(3) NOT NULL,
   nominal INTEGER NOT NULL,
   name VARCHAR(50) NOT NULL,
-  value REAL NOT NULL
+  value VARCHAR(10) NOT NULL
 )
 """
 
 execute_query(connection, create_valutes_table)
 
-cursor = connection.cursor()
-a='R3412'
-b=235
-c="USD"
-d=1
-e='Доллар США'
-f=56.35
+def insertion(connection, query):
+    connection.autocommit = True
+    cursor = connection.cursor()
+    cursor.execute(query)
+    connection.commit()
+    print("Record inserted successfully")
 
-cursor.execute(f"INSERT INTO valutes (valuteid, numcode, charcode, nominal, name, value) VALUES ('{a}', {b},'{c}', {d}, '{e}', {f})")
 
-connection.commit()
-print("Record inserted successfully")
 
-connection.close()
+
