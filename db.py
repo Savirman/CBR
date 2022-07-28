@@ -1,5 +1,12 @@
-import psycopg2
+#!/usr/bin/env python3
+# by Dmitry Dolgov
+# EPAM Diploma Project
+# v.0.1 - 2022-04-12
+# Data from the cbr.ru about valutes.
+# Interraction with PostgreSQL Database
 
+import psycopg2
+#import main
 
 # Function connection to database
 def create_connection(db_name, db_user, db_password, db_host, db_port):
@@ -47,9 +54,10 @@ def execute_query(connection, query):
     except OperationalError as e:
         print(f"The error '{e}' occurred")
 
+# Query creation of table "valutes"
 create_valutes_table = """
 CREATE TABLE IF NOT EXISTS valutes (
-  valuteid VARCHAR(5) PRIMARY KEY NOT NULL,
+  valuteid VARCHAR(6) PRIMARY KEY NOT NULL,
   numcode INTEGER NOT NULL, 
   charcode VARCHAR(3) NOT NULL,
   nominal INTEGER NOT NULL,
@@ -59,3 +67,18 @@ CREATE TABLE IF NOT EXISTS valutes (
 """
 
 execute_query(connection, create_valutes_table)
+
+cursor = connection.cursor()
+a='R3412'
+b=235
+c="USD"
+d=1
+e='Доллар США'
+f=56.35
+
+cursor.execute(f"INSERT INTO valutes (valuteid, numcode, charcode, nominal, name, value) VALUES ('{a}', {b},'{c}', {d}, '{e}', {f})")
+
+connection.commit()
+print("Record inserted successfully")
+
+connection.close()

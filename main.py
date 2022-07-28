@@ -35,7 +35,7 @@ while day <= int(current_day):
 # Getting the date from xml. It's an attribute of ValCurs tag <ValCurs Date="02.03.2002" name="Foreign Currency Market">
     for item in xmldoc.iter('ValCurs'):
         valkurs = item.attrib
-        print(valkurs['Date'])
+        #print(valkurs['Date'])
 
     '''
     Getting the data about valutes.
@@ -51,11 +51,15 @@ while day <= int(current_day):
         name = item.findtext('Name')
         value = item.findtext('Value')
 
+        print(valkurs['Date'])
         print(valuteid['ID'])
         print(numcode)
         print(charcode)
         print(nominal)
         print(name)
         print(value)
+        print(" ")
+
+        # Call function insert values into table
 
     day = day + 1
