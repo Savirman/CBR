@@ -61,7 +61,7 @@ while day <= int(current_day):
         print(value)
         print(" ")
 
-        # Indertion tre data about valutes into table "valutes" of DB cbr
+        # Insertion the data about valutes into table "valutes" of DB cbr
         insert_values_into_valutes = f"INSERT INTO valutes (date, valuteid, numcode, charcode, nominal, name, value) VALUES ('{valkurs['Date']}', '{valuteid['ID']}', {numcode},'{charcode}', {nominal}, '{name}', '{value}')"
         db.insertion(db.connection, insert_values_into_valutes)
 
