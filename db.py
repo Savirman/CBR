@@ -62,7 +62,8 @@ CREATE TABLE IF NOT EXISTS valutes (
   charcode VARCHAR(3) NOT NULL,
   nominal INTEGER NOT NULL,
   name VARCHAR(50) NOT NULL,
-  value VARCHAR(10) NOT NULL
+  value VARCHAR(10) NOT NULL,
+  UNIQUE (date, valuteid, numcode, charcode, nominal, name, value)
 )
 """
 
@@ -71,9 +72,12 @@ execute_query(connection, create_valutes_table)
 def insertion(connection, query):
     connection.autocommit = True
     cursor = connection.cursor()
-    cursor.execute(query)
-    connection.commit()
-    print("Record inserted successfully")
+    try:
+        cursor.execute(query)
+        connection.commit()
+        print("Record inserted successfully")
+    except:
+        print("The inserted data is currently in the table")
 
 
 
