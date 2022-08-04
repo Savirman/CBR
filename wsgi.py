@@ -1,5 +1,6 @@
 from flask import Flask, render_template, url_for, request
 import psycopg2
+import main
 import db
 
 # Create an instanse of Flask App
@@ -12,7 +13,7 @@ def index():
         print(request.form)
     valute_name = request.args.get('valute')
     selected_date = request.args.get('date')
-
+    # Connection to DB cbr
     connection = psycopg2.connect(
         database="cbr",
         user="postgres",
@@ -21,12 +22,11 @@ def index():
         port="5432"
     )
     connection.autocommit = True
+    # Data extraction from table "valutes" cbr
     cursor = connection.cursor()
     sql_query = f"SELECT * from valutes WHERE name='{valute_name}' AND date='02.08.2022'"
     cursor.execute(sql_query)
     context_records = cursor.fetchall()
-    ContextRootKeys = []
-    outp = "Print each row and it's columns values"
     for row in context_records:
         date = row[0]
         valuteid = row[1]
@@ -34,9 +34,9 @@ def index():
         charcode = row[3]
         nominal = row[4]
         name = row[5]
-        curs = row[6]
+        value = row[6]
     connection.commit()
-    return render_template("index.html", valute = valute_name, date = selected_date, curs = curs)
+    return render_template("index.html", valute = valute_name, date = selected_date, curs = value)
 
 @app.errorhandler(404)
 def pageNotFound(error):
