@@ -1,14 +1,46 @@
-from flask import Flask, render_template, url_for
-import main
+from flask import Flask, render_template, url_for, request
+import psycopg2
 import db
 
+# Create an instanse of Flask App
 app = Flask(__name__)
 
-@app.route('/')
-@app.route('/index')
+@app.route('/', methods=["GET"])
+@app.route('/index', methods=["GET"])
 def index():
-    return render_template("index.html", date = main.valkurs['Date'], current_date = main.current_date)
+    if request.method == 'GET':
+        print(request.form)
+    valute_name = request.args.get('valute')
+    selected_date = request.args.get('date')
 
+    connection = psycopg2.connect(
+        database="cbr",
+        user="postgres",
+        password="111111",
+        host="127.0.0.1",
+        port="5432"
+    )
+    connection.autocommit = True
+    cursor = connection.cursor()
+    sql_query = f"SELECT * from valutes WHERE name='{valute_name}' AND date='02.08.2022'"
+    cursor.execute(sql_query)
+    context_records = cursor.fetchall()
+    ContextRootKeys = []
+    outp = "Print each row and it's columns values"
+    for row in context_records:
+        date = row[0]
+        valuteid = row[1]
+        numcode = row[2]
+        charcode = row[3]
+        nominal = row[4]
+        name = row[5]
+        curs = row[6]
+    connection.commit()
+    return render_template("index.html", valute = valute_name, date = selected_date, curs = curs)
+
+@app.errorhandler(404)
+def pageNotFound(error):
+    return render_template('page404.html', title="Страница не найдена")
 
 if __name__ == '__main__':
     app.run()
