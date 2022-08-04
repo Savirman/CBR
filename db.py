@@ -6,6 +6,7 @@
 # Interraction with PostgreSQL Database
 
 import psycopg2
+import wsgi
 
 # Function connection to database
 def create_connection(db_name, db_user, db_password, db_host, db_port):
@@ -78,6 +79,20 @@ def insertion(connection, query):
         print("Record inserted successfully")
     except:
         print("The inserted data is currently in the table")
+
+def extraction(connection, extraction_query):
+    connection.autocommit = True
+    cursor = connection.cursor()
+    try:
+        cursor.execute(extraction_query)
+        result = cursor.fetchall()
+        print("Query executed successfully")
+        print("Результат", result)
+    except OperationalError as e:
+        print(f"The error '{e}' occurred")
+
+#extraction_query = f"SELECT * from valutes WHERE name='{wsgi.valute_name}' AND date='02.08.2022'"
+#extraction(connection, extraction_query)
 
 
 
