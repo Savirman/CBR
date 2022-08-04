@@ -9,7 +9,7 @@
     <h1>Информация о курсах валют</h1>
     <form action="/index" method="get">
         <p><label>Выберите валюту: </label>
-            <select required>
+            <select name="valute" required>
                 <option value="Австралийский доллар">Австралийский доллар</option>
                 <option value="Азербайджанский манат">Азербайджанский манат</option>
                 <option value="Фунт стерлингов Соединенного королевства">Фунт стерлингов Соединенного королевства</option>
@@ -48,6 +48,6 @@
         <p><label>Выберите дату: </label><input type="date" name="date" value="" min="2018-01-01" max="{{current_date}}" required /></p>
         <p><input type="submit" value="Запросить данные" /></p>
     </form>
-    <p>Курс американского доллара на {{date}} составляет 67,43 рублей</p>
+    <p>Курс {{valute}} на {{date}} составляет {{curs}} рублей</p>
 </body>
 </html>
