@@ -1,11 +1,53 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
+    <link type="text/css" href="{{url_for('static', filename='css/styles.css')}}" rel="stylesheet" />
     <meta charset="UTF-8">
     <title>Информация о курсах валют</title>
 </head>
 <body>
     <h1>Информация о курсах валют</h1>
+    <form action="/index" method="get">
+        <p><label>Выберите валюту: </label>
+            <select required>
+                <option value="Австралийский доллар">Австралийский доллар</option>
+                <option value="Азербайджанский манат">Азербайджанский манат</option>
+                <option value="Фунт стерлингов Соединенного королевства">Фунт стерлингов Соединенного королевства</option>
+                <option value="Армянских драмов">Армянских драмов</option>
+                <option value="Белорусский рубль">Белорусский рубль</option>
+                <option value="Болгарский лев">Болгарский лев</option>
+                <option value="Бразильский реал">Бразильский реал</option>
+                <option value="Венгерских форинтов">Венгерских форинтов</option>
+                <option value="Гонконгских долларов">Гонконгских долларов</option>
+                <option value="Датских крон">Датских крон</option>
+                <option value="Доллар США">Доллар США</option>
+                <option value="Евро">Евро</option>
+                <option value="Индийских рупий">Индийских рупий</option>
+                <option value="Казахстанских тенге">Казахстанских тенге</option>
+                <option value="Канадский доллар">Канадский доллар</option>
+                <option value="Киргизских сомов">Киргизских сомов</option>
+                <option value="Китайских юаней">Китайских юаней</option>
+                <option value="Молдавских леев">Молдавских леев</option>
+                <option value="Норвежских крон">Норвежских крон</option>
+                <option value="Польский злотый">Польский злотый</option>
+                <option value="Румынский лей">Румынский лей</option>
+                <option value="СДР (специальные права заимствования)">СДР (специальные права заимствования)</option>
+                <option value="Сингапурский доллар">Сингапурский доллар</option>
+                <option value="Таджикских сомони">Таджикских сомони</option>
+                <option value="Турецких лир">Турецких лир</option>
+                <option value="Новый туркменский манат">Новый туркменский манат</option>
+                <option value="Узбекских сумов">Узбекских сумов</option>
+                <option value="Украинских гривен">Украинских гривен</option>
+                <option value="Чешских крон">Чешских крон</option>
+                <option value="Шведских крон">Шведских крон</option>
+                <option value="Швейцарский франк">Швейцарский франк</option>
+                <option value="Южноафриканских рэндов">Южноафриканских рэндовв</option>
+                <option value="Вон Республики Корея">Вон Республики Корея</option>
+                <option value="Японских иен">Японских иен</option>
+            </select></p>
+        <p><label>Выберите дату: </label><input type="date" name="date" value="" min="2018-01-01" max="{{current_date}}" required /></p>
+        <p><input type="submit" value="Запросить данные" /></p>
+    </form>
     <p>Курс американского доллара на {{date}} составляет 67,43 рублей</p>
 </body>
 </html>
