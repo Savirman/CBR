@@ -6,7 +6,6 @@
 # Interraction with PostgreSQL Database
 
 import psycopg2
-import wsgi
 
 # Function connection to database
 def create_connection(db_name, db_user, db_password, db_host, db_port):
@@ -57,7 +56,7 @@ def execute_query(connection, query):
 # Query creation of table "valutes"
 create_valutes_table = """
 CREATE TABLE IF NOT EXISTS valutes (
-  date VARCHAR(10) NOT NULL, 
+  date DATE NOT NULL, 
   valuteid VARCHAR(10) NOT NULL,
   numcode INTEGER NOT NULL, 
   charcode VARCHAR(3) NOT NULL,

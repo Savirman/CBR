@@ -8,7 +8,7 @@
 
 from urllib.request import urlopen
 from xml.etree.ElementTree import parse
-from datetime import date
+from datetime import date, datetime
 import db
 
 # Getting current date
@@ -36,6 +36,7 @@ while day <= int(current_day):
 # Getting the date from xml. It's an attribute of ValCurs tag <ValCurs Date="02.03.2002" name="Foreign Currency Market">
     for item in xmldoc.iter('ValCurs'):
         valkurs = item.attrib
+        formatted_date = datetime.strptime(valkurs['Date'], '%d.%m.%Y').date()
         #print(valkurs['Date'])
 
     '''
@@ -53,6 +54,7 @@ while day <= int(current_day):
         value = item.findtext('Value')
 
         print(valkurs['Date'])
+        print(formatted_date)
         print(valuteid['ID'])
         print(numcode)
         print(charcode)
@@ -62,7 +64,7 @@ while day <= int(current_day):
         print(" ")
 
         # Insertion the data about valutes into table "valutes" of DB cbr
-        insert_values_into_valutes = f"INSERT INTO valutes (date, valuteid, numcode, charcode, nominal, name, value) VALUES ('{valkurs['Date']}', '{valuteid['ID']}', {numcode},'{charcode}', {nominal}, '{name}', '{value}')"
+        insert_values_into_valutes = f"INSERT INTO valutes (date, valuteid, numcode, charcode, nominal, name, value) VALUES ('{formatted_date}', '{valuteid['ID']}', {numcode},'{charcode}', {nominal}, '{name}', '{value}')"
         db.insertion(db.connection, insert_values_into_valutes)
 
     day = day + 1

@@ -13,6 +13,7 @@ def index():
         print(request.form)
     valute_name = request.args.get('valute')
     selected_date = request.args.get('date')
+
     # Connection to DB cbr
     connection = psycopg2.connect(
         database="cbr",
@@ -24,7 +25,7 @@ def index():
     connection.autocommit = True
     # Data extraction from table "valutes" cbr
     cursor = connection.cursor()
-    sql_query = f"SELECT * from valutes WHERE name='{valute_name}' AND date='02.08.2022'"
+    sql_query = f"SELECT * from valutes WHERE name='{valute_name}' AND date='2022-08-01'"
     cursor.execute(sql_query)
     context_records = cursor.fetchall()
     for row in context_records:
@@ -36,7 +37,7 @@ def index():
         name = row[5]
         value = row[6]
     connection.commit()
-    return render_template("index.html", valute = valute_name, date = selected_date, curs = value)
+    return render_template("index.html", quantity = 2, valute = valute_name, date = selected_date, curs = 3)
 
 @app.errorhandler(404)
 def pageNotFound(error):
