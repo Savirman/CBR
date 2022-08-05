@@ -1,3 +1,10 @@
+#!/usr/bin/env python3
+# by Dmitry Dolgov
+# EPAM Diploma Project
+# v.0.1 - 2022-04-12
+# Data from the cbr.ru about valutes.
+# Front-end of application
+
 from flask import Flask, render_template, url_for, request
 import psycopg2
 import main
@@ -5,6 +12,10 @@ import db
 
 # Create an instanse of Flask App
 app = Flask(__name__)
+
+@app.route('/', methods=['GET'])
+def first():
+    return render_template('valutes.html')
 
 @app.route('/', methods=["GET"])
 @app.route('/index', methods=["GET"])
@@ -25,7 +36,7 @@ def index():
     connection.autocommit = True
     # Data extraction from table "valutes" cbr
     cursor = connection.cursor()
-    sql_query = f"SELECT * from valutes WHERE name='{valute_name}' AND date='2022-08-01'"
+    sql_query = f"SELECT * from valutes WHERE name='{valute_name}' AND date='{selected_date}'"
     cursor.execute(sql_query)
     context_records = cursor.fetchall()
     for row in context_records:
@@ -37,7 +48,7 @@ def index():
         name = row[5]
         value = row[6]
     connection.commit()
-    return render_template("index.html", quantity = 2, valute = valute_name, date = selected_date, curs = 3)
+    return render_template("index.html", quantity = nominal, valute = name, date = selected_date, curs = value)
 
 @app.errorhandler(404)
 def pageNotFound(error):
