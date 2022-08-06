@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # by Dmitry Dolgov
 # EPAM Diploma Project
-# v.0.1 - 2022-04-12
+# v.0.1 - 2022-07-30
 # Data from the cbr.ru about valutes.
 # Interraction with PostgreSQL Database
 

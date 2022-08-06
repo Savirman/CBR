@@ -1,11 +1,11 @@
 #!/usr/bin/env python3
 # by Dmitry Dolgov
 # EPAM Diploma Project
-# v.0.1 - 2022-04-12
+# v.0.1 - 2022-08-05
 # Data from the cbr.ru about valutes.
 # Front-end of application
 
-from flask import Flask, render_template, url_for, request
+from flask import Flask, render_template, request
 import psycopg2
 import main
 import db
@@ -14,6 +14,7 @@ import db
 app = Flask(__name__)
 
 @app.route('/', methods=['GET'])
+#@app.route('/index', methods=["GET"])
 def first():
     return render_template('valutes.html')
 
