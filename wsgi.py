@@ -31,7 +31,7 @@ def index():
         database="cbr",
         user="postgres",
         password="111111",
-        host="127.0.0.1",
+        host="192.168.243.3",
         port="5432"
     )
     connection.autocommit = True

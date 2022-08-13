@@ -23,7 +23,7 @@ def create_connection(db_name, db_user, db_password, db_host, db_port):
         print(f"The error {e} occurred")
     return connection
 
-connection = create_connection("postgres", "postgres", "111111", "127.0.0.1", "5432")
+connection = create_connection("postgres", "postgres", "111111", "192.168.243.3", "5432")
 
 # Function creation of database "cbr"
 def create_database(connection, query):
@@ -41,7 +41,7 @@ def create_database(connection, query):
 create_database_query = "CREATE DATABASE cbr"
 create_database(connection, create_database_query)
 
-connection = create_connection("cbr", "postgres", "111111", "127.0.0.1", "5432")
+connection = create_connection("cbr", "postgres", "111111", "192.168.243.3", "5432")
 
 # Function creation of table "valutes"
 def execute_query(connection, query):
@@ -92,7 +92,4 @@ def extraction(connection, extraction_query):
 
 #extraction_query = f"SELECT * from valutes WHERE name='{wsgi.valute_name}' AND date='02.08.2022'"
 #extraction(connection, extraction_query)
-
-
-
 
